@@ -7,11 +7,11 @@ import {
   Box,
   Button,
   Icon,
+  Flex,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { TbArrowsDownUp } from "react-icons/tb";
 import TableRow from "../Components/TableRow";
-
 
 const TableScreen = ({ config, data }) => {
   const [listData, SetListData] = useState(data);
@@ -77,45 +77,67 @@ const TableScreen = ({ config, data }) => {
   };
   return (
     <>
-      <Box bgColor="white" rounded="lg" shadow="md" px="5" py="5">
-        <Table variant="striped" colorScheme="gray" size="sm">
-          <Thead>
-            <Tr>
-              {config &&
-                config.map((item, key) => {
-                  return item.sortable ? (
-                    <Th key={key}>
-                      {item.heading}{" "}
-                      <Button
-                        background="transparent"
-                        _hover={{ style: "none" }}
-                        onClick={() => {
-                          SetSort(!sort);
-                          sortHandler(item.value);
-                        }}
-                      >
-                        <Icon as={TbArrowsDownUp} />
-                      </Button>
-                    </Th>
-                  ) : (
-                    <Th key={key}>{item.heading}</Th>
-                  );
-                })}
-            </Tr>
-          </Thead>
-          <Tbody>
-            {listData &&
-              listData.map((item, index) => (
-                <TableRow item={item} config={config} key={index} />
-              ))}
-          </Tbody>
-        </Table>
-      </Box>
+      <Table
+        variant="striped"
+        colorScheme="gray"
+        size="sm"
+        width="fit-content"
+        ml="5rem"
+      >
+        <Thead>
+          <Tr>
+            {config &&
+              config.map((item, key) => {
+                return item.sortable ? (
+                  <Th
+                    key={key}
+                    fontWeight="600"
+                    fontSize={"14px"}
+                    border="1px solid #E1E1E1"
+                    textTransform="capitalize"
+                  >
+                    <Flex alignItems={"center"}>
+                      <Box>{item.heading}</Box>
+                      <Box>
+                        <Button
+                          ml="-2"
+                          background="transparent"
+                          _hover={{ style: "none" }}
+                          onClick={() => {
+                            SetSort(!sort);
+                            sortHandler(item.value);
+                          }}
+                        >
+                          <Icon as={TbArrowsDownUp} />
+                        </Button>
+                      </Box>
+                    </Flex>
+                  </Th>
+                ) : (
+                  <Th
+                    key={key}
+                    fontWeight="600"
+                    fontSize={"14px"}
+                    border="1px solid #E1E1E1"
+                    textTransform="capitalize"
+                  >
+                    {item.heading}
+                  </Th>
+                );
+              })}
+          </Tr>
+        </Thead>
+        <Tbody>
+          {listData &&
+            listData.map((item, index) => (
+              <TableRow item={item} config={config} key={index} />
+            ))}
+        </Tbody>
+      </Table>
     </>
   );
 };
 
-
 export default TableScreen;
 
-//{item[itemSplit[0]][itemSplit[1]]}
+

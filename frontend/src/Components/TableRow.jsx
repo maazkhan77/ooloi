@@ -6,7 +6,12 @@ const TableRow = ({ item, config }) => (
       if (configItem.value.includes(".")) {
         const itemSplit = configItem.value.split(".");
         return (
-          <Td key={index}>
+          <Td
+            key={index}
+            fontWeight="400"
+            fontSize={"14px"}
+            border="1px solid #E1E1E1"
+          >
             <Flex gap="3" alignItems="center">
               <Box>
                 <Image src={`/Assets/${item[itemSplit[0]]["avatar"]}`} />
@@ -17,14 +22,28 @@ const TableRow = ({ item, config }) => (
         );
       } else if (configItem.value === "email") {
         return (
-          <Td key={index}>
+          <Td
+            key={index}
+            fontWeight="400"
+            fontSize={"14px"}
+            border="1px solid #E1E1E1"
+          >
             <Link color="blue" textDecor={"underline"}>
               {item[`${configItem.value}`]}
             </Link>
           </Td>
         );
       }
-      return <Td key={index}>{item[`${configItem.value}`]}</Td>;
+      return (
+        <Td
+          key={index}
+          fontWeight="400"
+          fontSize={"14px"}
+          border="1px solid #E1E1E1"
+        >
+          {item[`${configItem.value}`]}
+        </Td>
+      );
     })}
   </Tr>
 );
